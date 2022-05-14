@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="GT Homework" id="Project-189e" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="GT Homework" >
+		<table name="departments" prior="entity" >
+			<column name="dept_no" type="VARCHAR" length="5" jt="12" mandatory="y" />
+			<column name="dept_name" type="VARCHAR" length="50" jt="12" />
+			<index name="idx_entity" unique="PRIMARY_KEY" >
+				<column name="dept_no" />
+			</index>
+			<fk name="fk_departments" virtual="y" to_schema="GT Homework.INSTANCE" to_table="dept_emp" type="Identifying" >
+				<fk_column name="dept_no" pk="dept_no" />
+			</fk>
+			<fk name="fk_departments_0" virtual="y" to_schema="GT Homework.INSTANCE" to_table="dept_manager" type="Identifying" >
+				<fk_column name="dept_no" pk="dept_no" />
+			</fk>
+		</table>
+		<table name="dept_emp" prior="dept" >
+			<column name="emp_no" type="INT" jt="4" mandatory="y" />
+			<column name="dept_no" type="VARCHAR" length="5" jt="12" />
+			<index name="idx_dept_emp" unique="PRIMARY_KEY" >
+				<column name="emp_no" />
+			</index>
+			<fk name="fk_dept_emp" virtual="y" to_schema="GT Homework.INSTANCE" to_table="employees" type="Identifying" >
+				<fk_column name="emp_no" pk="emp_no" />
+			</fk>
+		</table>
+		<table name="dept_manager" prior="entity" >
+			<column name="dept_no" type="VARCHAR" length="5" jt="12" />
+			<column name="emp_no" type="INT" jt="4" mandatory="y" />
+			<index name="idx_dept_manager" unique="PRIMARY_KEY" >
+				<column name="emp_no" />
+			</index>
+			<fk name="fk_dept_manager" virtual="y" to_schema="GT Homework.INSTANCE" to_table="employees" type="Identifying" >
+				<fk_column name="emp_no" pk="emp_no" />
+			</fk>
+		</table>
+		<table name="employees" prior="empl" >
+			<column name="emp_no" type="INT" jt="4" mandatory="y" />
+			<column name="emp_title_id" type="VARCHAR" length="8" jt="12" />
+			<column name="birth_date" type="DATE" jt="91" />
+			<column name="first_name" type="VARCHAR" length="50" jt="12" />
+			<column name="last_name" type="VARCHAR" length="50" jt="12" />
+			<column name="sex" type="VARCHAR" length="1" jt="12" />
+			<column name="hire_date" type="DATE" jt="91" />
+			<index name="idx_employees" unique="PRIMARY_KEY" >
+				<column name="emp_no" />
+			</index>
+		</table>
+		<table name="salaries" prior="entity" >
+			<column name="emp_no" type="INT" jt="4" mandatory="y" />
+			<column name="salary" type="INT" jt="4" />
+			<index name="idx_salaries" unique="PRIMARY_KEY" >
+				<column name="emp_no" />
+			</index>
+			<fk name="fk_salaries" virtual="y" to_schema="GT Homework.INSTANCE" to_table="employees" type="Identifying" >
+				<fk_column name="emp_no" pk="emp_no" />
+			</fk>
+		</table>
+		<table name="titles" prior="entity_0" >
+			<column name="title_id" prior="emp_title_id" type="VARCHAR" length="5" jt="12" mandatory="y" />
+			<column name="title" type="VARCHAR" length="50" jt="12" />
+			<index name="idx_entity_0" unique="PRIMARY_KEY" >
+				<column name="title_id" />
+			</index>
+			<fk name="fk_titles" virtual="y" to_schema="GT Homework.INSTANCE" to_table="employees" type="Identifying" >
+				<fk_column name="title_id" pk="emp_title_id" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-18d4" joined_routing="y" show_relation="columns" >
+		<entity schema="GT Homework.INSTANCE" name="departments" color="3986C1" x="560" y="304" />
+		<entity schema="GT Homework.INSTANCE" name="dept_emp" color="C1D8EE" x="336" y="288" />
+		<entity schema="GT Homework.INSTANCE" name="dept_manager" color="C1D8EE" x="336" y="176" />
+		<entity schema="GT Homework.INSTANCE" name="employees" color="C1D8EE" x="48" y="384" />
+		<entity schema="GT Homework.INSTANCE" name="salaries" color="C1D8EE" x="336" y="384" />
+		<entity schema="GT Homework.INSTANCE" name="titles" color="3986C1" x="336" y="480" />
+		<callout x="544" y="48" pointer="Round" >
+			<comment><![CDATA[Add entities to the layout by drag & drop from the project structure.
+Double-click the entity header to edit.
+Drop this callout from its context menu.]]></comment>
+		</callout>
+	</layout>
+</project>
